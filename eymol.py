@@ -45,9 +45,9 @@ def sm(	I, # input stimuly as np matrix
     h, w = I.shape
 
     if w/960 > h/540:
-        h, w = int(540*(w/960)), 960
+        h, w = int(h*(960/w)), 960
     else:
-        h, w = 540, int(960*(h/540))
+        h, w = 540, int(w*(540/h))
 
     I = cv2.resize(I, (w,h), interpolation = cv2.INTER_CUBIC)
 
