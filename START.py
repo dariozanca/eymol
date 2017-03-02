@@ -24,8 +24,6 @@ fig.add_subplot(1,2,2)
 plt.imshow(sm, cmap='gray')
 plt.show()
 
-print "\nTHE END!\n"
-
 
 
 
