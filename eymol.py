@@ -43,6 +43,8 @@ def sm(	I, # input stimuly as np matrix
 
     # rescale (960x540 max sizes)
     h, w = I.shape
+    h=float(h)
+    w=float(w)
 
     if w/960 > h/540:
         h, w = int(h*(960/w)), 960
