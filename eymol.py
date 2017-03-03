@@ -18,13 +18,13 @@ def sm(	I, # input stimuly as np matrix
 		  	eta=3.5*10**2, etap=2*10**4, lambd=10**-3, # model parameters
 			theta=10**-3, # dissipation term (see: energy balance)
 
-          	peripheral_sigmas = (151,301), # sigmas to compute peripheral vision as DoG
+          	peripheral_sigmas = (201,301), # sigmas to compute peripheral vision as DoG
 
 			apply_center=True, # if you would center bias input during preprocessing
 
 			observers=199, # number of virtual observers 
 			seconds=1, # time of observation for each of the observers
-			initRay=75, # range around the center to initialize first fixation, set 0 to biggest ray
+			initRay=0, # range around the center to initialize first fixation
 
 		    blurRadius=70, # blur parameter for sm optimization
 
@@ -41,16 +41,15 @@ def sm(	I, # input stimuly as np matrix
 
     I_original = np.copy(I)
 
-    # rescale (960x540 max sizes)
+    # rescale 
     h, w = I.shape
     h=float(h)
     w=float(w)
-
-    if w/960 > h/540:
-        h, w = int(h*(960/w)), 960
+    maxw, maxh=1920, 1080
+    if w/maxw > h/maxh:
+        h, w = int(h*(maxw/w)), maxw
     else:
-        h, w = 540, int(w*(540/h))
-
+        h, w = maxh, int(w*(maxh/h))
     I = cv2.resize(I, (w,h), interpolation = cv2.INTER_CUBIC)
 
     # image pre-processing and compute retina boundaries
@@ -92,7 +91,7 @@ def sm(	I, # input stimuly as np matrix
     while not ( i > observers ):
         
         # generate initial conditions
-        if initRay == 0: initRay = int(min(h,w)/2)
+        if initRay == 0: initRay = int(min(h,w)*0.17)
         init_x1 = int(I_shape[0]/2) + randint(-initRay,initRay)
         init_x2 = int(I_shape[1]/2) + randint(-initRay,initRay)
         init_v1 = uniform(0.3,0.7) * ((-1)**randint(0,1))
