@@ -18,7 +18,7 @@ def sm(	I, # input stimuly as np matrix
 		  	eta=3.5*10**2, etap=2*10**4, lambd=10**-3, # model parameters
 			theta=10**-3, # dissipation term (see: energy balance)
 
-          	peripheral_sigmas = (201,301), # sigmas to compute peripheral vision as DoG
+          		peripheral_sigmas = (201,301), # sigmas to compute peripheral vision as DoG
 
 			apply_center=True, # if you would center bias input during preprocessing
 
@@ -26,14 +26,12 @@ def sm(	I, # input stimuly as np matrix
 			seconds=1, # time of observation for each of the observers
 			initRay=0, # range around the center to initialize first fixation
 
-		    blurRadius=70, # blur parameter for sm optimization
+			blurRadius=70, # blur parameter for sm optimization
 
 			return_scanpath=False, # if scanpath is desired
 			msgs=True # print messages
 
 		  	):
-
-    ''' '''
 
     # convert I to grayscale, if not already
     if len(np.shape(I)) > 2:
