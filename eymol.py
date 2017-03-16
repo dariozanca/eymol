@@ -18,7 +18,7 @@ def sm(	I, # input stimuly as np matrix
 		  	eta=3.5*10**2, etap=2*10**4, lambd=10**-3, # model parameters
 			theta=10**-3, # dissipation term (see: energy balance)
 
-          		peripheral_sigmas = (201,301), # sigmas to compute peripheral vision as DoG
+          	peripheral_sigmas = (201,301), # sigmas to compute peripheral vision as DoG
 
 			apply_center=True, # if you would center bias input during preprocessing
 
@@ -26,12 +26,15 @@ def sm(	I, # input stimuly as np matrix
 			seconds=1, # time of observation for each of the observers
 			initRay=0, # range around the center to initialize first fixation
 
-			blurRadius=70, # blur parameter for sm optimization
+		    blurRadius=70, # blur parameter for sm optimization
 
 			return_scanpath=False, # if scanpath is desired
-			msgs=True # print messages
+			msgs=True, # print messages
 
+			PPS = 30 # points per second (points of the scanpath to be return for each second)
 		  	):
+
+    ''' '''
 
     # convert I to grayscale, if not already
     if len(np.shape(I)) > 2:
@@ -75,10 +78,10 @@ def sm(	I, # input stimuly as np matrix
     FPS = 300 # Frames per second
     FixPS = 4 # Fixations per second
     OMEGA = pi * (1.0 / FPS) * (FixPS) 
-    parameters = {'eta': eta, 'etap': etap, 'lambda': lambd, 'theta': theta, 'kappa': 10**6, 'b': b, 'omega': OMEGA} 
+    parameters = {'eta': eta, 'etap': etap, 'lambda': lambd, 'theta': theta, 'kappa': 10**2, 'b': b, 'omega': OMEGA} 
     
     "Numerical method"
-    time_step = 0.1
+    time_step = (PPS**-1)*FPS
     times = np.arange(0,seconds*FPS,time_step)  
     I_shape = np.shape(I)  
     
@@ -304,7 +307,7 @@ def compute_b(I):
 
     (h,w) = np.shape(I)
 
-    bias = 1
+    bias = 20
 
     bx_up = 0
     while bx_up < 0.5*h and (I[0:(bx_up+1), :] == I[0,0]).all():

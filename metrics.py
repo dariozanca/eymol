@@ -118,7 +118,7 @@ def KLdiv(saliencyMap, fixationMap):
 		map2 = map2/map2.sum()
 
     # compute KL-divergence
-	eps = 10**-12
+	eps = 0.01
 	score = map2 * np.log(eps + map2/(map1+eps))
 
 	return score.sum()
