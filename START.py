@@ -1,5 +1,5 @@
 '''
-Created on 31 ago 1948
+Created on 01 Mar 2017
 @author: Dario Zanca 
 @summary: Sample code to generate saliency map with EYMOL
 '''
