@@ -1,5 +1,6 @@
-# eymol
-EYMOL: Eye Movements Laws
+![alt text](https://raw.githubusercontent.com/dariozanca/eymol/master/eymol_logo.jpg)
+
+# EYMOL: Eye Movements Laws
 
 The paper is available at https://papers.nips.cc/paper/6972-variational-laws-of-visual-attention-for-dynamic-scenes. 
 
